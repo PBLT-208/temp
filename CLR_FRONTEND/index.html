@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CLR(1) Parser Visualizer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>CLR(1) Parser Visualizer</h1>
+    
+    <div class="section">
+      <label for="grammarInput">Enter Context-Free Grammar (CFG):</label>
+      <textarea id="grammarInput" placeholder="E → E+T | T\nT → T*F | F\nF → (E) | id"></textarea>
+    </div>
+
+    <div class="section">
+      <label for="inputString">Enter Input String to Parse:</label>
+      <input type="text" id="inputString" placeholder="id+id*id">
+    </div>
+
+    <div class="buttons">
+      <button onclick="generateTables()">Generate Parsing Tables</button>
+      <button onclick="parseString()">Parse Input</button>
+    </div>
+
+    <div class="output-section">
+      <h2>Parsing Table: ACTION & GOTO</h2>
+      <pre id="parsingTable">[ACTION and GOTO will be shown here]</pre>
+    </div>
+
+    <div class="output-section">
+      <h2>FIRST and FOLLOW Sets</h2>
+      <pre id="firstFollowSets">[FIRST and FOLLOW sets will be displayed here]</pre>
+    </div>
+
+    <div class="output-section">
+      <h2>Canonical LR(1) Item Sets</h2>
+      <pre id="itemSets">[Canonical LR(1) Items will appear here]</pre>
+    </div>
+
+    <div class="output-section">
+      <h2>Parsing Process</h2>
+      <pre id="parsingProcess">[Step-by-step parsing process will be shown here]</pre>
+    </div>
+
+    <div class="output-section">
+      <h2>Result</h2>
+      <p id="result">[Result will appear here]</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
