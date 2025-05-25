@@ -1,8 +1,8 @@
 #include "GrammarInput.h"
 #include "AugmentGrammar.h"
 #include "FirstFollow.h"
-#include "ItemSetGenerator.h"
-
+#include "ParsingTable.h"
+#include "InputParsing.h"
 using namespace std;
 
 int main() {
@@ -56,5 +56,21 @@ int main() {
     ItemSetGenerator item_generator(augment_prod, first);
     item_generator.generateItemSets();
     item_generator.displayItemSets(cout);
+    vector<set<Item>> item_sets = item_generator.getItemSets();
+
+    map<pair<int, string>, int> transitions = item_generator.getTransitions();
+    for(auto &mp: transitions){
+        cout << mp.first.first << " " << mp.first.second << " " << mp.second << endl;
+    }
+
+    ParsingTable parse_table(augment_prod, item_sets, transitions, follow, start);
+    parse_table.generateParseTable();
+
+    map<int, map<string, string>> actionTable = parse_table.getActionTable();
+    map<int, map<string, int>> gotoTable = parse_table.getGotoTable();
+
+    InputParsing input_parse(actionTable, gotoTable, augment_prod);
+    input_parse.simulateParser();
+   
     return 0;
 }
